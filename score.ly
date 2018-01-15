@@ -510,6 +510,7 @@ melody = \relative c' {
 
 
 \book {
+\bookOutputSuffix "original-key"
 \score {
   <<
     \new ChordNames {
@@ -536,8 +537,6 @@ melody = \relative c' {
     }
   }
 }
-}
-\book {
 \score {
   <<
     \new ChordNames {
