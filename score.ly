@@ -94,7 +94,6 @@ upper-verse-two = \relative c {
   cis'32-2 dis eis-1 fis gis ais b-1 cis-4
 }
 bass-verse-two = \relative c,, {
-  \ottava #-1
   dis2 eis fis~ fis4. fis8 gis2 ais b4. b8 cis cis' gis, cis,
   dis2 eis fis fis'8 fis fis,4 gis2 cis fis,4. fis'8~ fis \appoggiatura eis16 fis8 eis cis
 }
@@ -109,7 +108,6 @@ upper-pre-chorus-two = \relative c' {
   <b dis>2 <cis fis> r8 <dis fis> r16 q8. <cis eis>2 s2
 }
 bass-pre-chorus-two = \relative c, {
-  \ottava #-1
   b8. b16~ b8 b~ b2 ais4. dis,8~ dis4. dis8 gis2 ais b4 bis cis8 gis cis,4
   b'8. b16~ b8 b~ b4. b8 ais4. ais8 dis4 ais8 dis, gis2 ais4 b r8 <cis, cis'>-> r16 q8.-> q2-> <dis dis'>4-- <eis eis'>--
 }
@@ -134,15 +132,9 @@ upper-chorus-one-print = \relative c''' {
   <fis ais cis fis>2~ q8 cis' ais4
 }
 bass-chorus-one = \relative c,, {
-  \ottava #-1
   <fis fis'>2. cis'8 fis, eis2.~ eis8 eis dis2 cis' b4. b8 cis gis cis,4
   fis2.~ fis8 cis' eis,1 dis2 dis'4. dis8 cis4. gis8 cis,2
-  << {\ottava #0 r8 cis''\( gis' ais cis gis ais4\)} \new Staff {
-    \set Staff.explicitKeySignatureVisibility = #all-invisible
-    \clef bass \key fis \major
-    \once \omit Staff.TimeSignature
-    \ottava #-1 fis,,1 \ottava #0
-  } >>
+  << {\ottava #0 r8 cis''\( gis' ais cis gis ais4\)} \\ { fis,,1 } >>
 }
 melody-episode = \relative c''' {
   \key a \major
@@ -179,6 +171,20 @@ bass-episode = \relative c {
     \ottava #-1
     e,,,2 d cis2. cis'4 fis,2.~ fis8 fis' fis,1
   }
+}
+harmony-and-bass-episode = \relative c' {
+  \key a \major
+  << {
+    r8\sustainOn a-. <b cis>-.\sustainOff <e a>-. r8\sustainOn a,-. <b cis>-.\sustainOff <e a>-.
+    r8_\markup {\italic "simile"} e, <gis b> <b e> r e, <gis b> <b e>
+    r8 g <b d> <d g> r g, <b d> <d g>
+    r8 fis, a d r fis, a d
+    r8 e,\( b' e\) r d,\( b' e\) r cis,\( gis' b ais2\)
+    r8 fis\( b cis fis b, cis4\) R1
+  } \\ {
+    a,2 e' e, e'' g,, g'' d, d'
+    e,,2 d cis2~ cis4 cis'4 fis,2.~ fis8 fis' fis,1
+  } >>
 }
 top-pre-chorus-three-midi = \relative c''' {
   s4 s2 s2 r8 b\( ais fis dis4. cis16 b cis2\) r2
@@ -220,7 +226,6 @@ upper-pre-chorus-three-print = \relative c'' {
 }
 bass-pre-chorus-three = \relative c, {
   \key fis \major
-  \ottava #-1
   b8. b16~ b8 b~ b2 ais4. dis,8~ dis4. dis8 gis2 ais b4 bis cis8 gis cis,4
   b'8. b16~ b8 b~ b4. b8 ais4. ais8 dis4 ais8 dis, gis2 ais4 b r8 <cis, cis'>-> r16 q8.-> q2-> <dis dis'>4 <eis eis'>
 }
@@ -233,7 +238,6 @@ upper-chorus-two = \relative c'' {
   <fis, a fis'>8 e' <a, cis>16 d-5 cis b fis-1 g a b c-1 d e fis
 }
 bass-chorus-two = \relative c,, {
-  \ottava #-1
   <fis fis'>2. cis'8 fis, eis2.~ eis8 eis dis2 cis' b4. b8 cis gis cis,4
   fis2.~ fis8 cis' eis,1 dis2 dis'4. dis8 cis,4. gis'8 cis gis cis,4 d4. a''8 d d, a d,
 }
@@ -364,15 +368,290 @@ lower-print = \relative c {
   \bass-verse-one
   \lower-pre-chorus-one
   << {\lower-bridge-one} \\ {\bass-bridge-one} >>
+  \ottava #-1
   \bass-verse-two
   \bass-pre-chorus-two
   \bass-chorus-one
+  \ottava #0
   << {\harmony-episode} \\ {\bass-episode} >>
+  \ottava #-1
   \bass-pre-chorus-three
   \bass-chorus-two
   \bass-chorus-three
   \bass-chorus-last
   \bass-end
+  \bar "|."
+}
+
+upper-midi-c-major = \relative c' {
+  \set Staff.pedalSustainStyle = #'bracket
+  \key c \major
+  \clef treble
+  \tempo 4 = 93
+  \transpose fis c {
+    \upper-intro-a
+    \upper-intro-b-easy
+    \upper-verse-one
+    \upper-pre-chorus-one
+    \upper-bridge-one
+    \upper-verse-two
+    << {\violin-pre-chorus-two} \\ {\upper-pre-chorus-two} >>
+    \upper-chorus-one-midi
+  }
+  \transpose a ees {
+    << {\melody-episode} \\ {\oboe-episode} >>
+  }
+  \transpose fis c {
+    \upper-pre-chorus-three-midi
+    \upper-chorus-two
+  }
+  \transpose g cis {
+    << {\upper-chorus-three} \\ {\harmony-upper-chorus-three} >>
+  }
+  \transpose bes e {
+    \melody-chorus-last
+  }
+  \transpose bes e' {
+    \upper-end
+  }
+  \bar "|."
+}
+
+lower-midi-c-major = \relative c {
+  \set Staff.pedalSustainStyle = #'bracket
+  \key c \major
+  \clef bass
+  \transpose fis c {
+    \lower-intro-midi
+    \bass-verse-one
+    \lower-pre-chorus-one
+    << {\lower-bridge-one} \\ {\bass-bridge-one} >>
+  }
+  \transpose fis c' {
+    \bass-verse-two
+    \bass-pre-chorus-two
+    \bass-chorus-one
+  }
+  \transpose a ees {
+    \harmony-and-bass-episode
+  }
+  \transpose fis c' {
+    \bass-pre-chorus-three
+    \bass-chorus-two
+  }
+  \transpose g des' {
+    \bass-chorus-three
+  }
+  \transpose bes e' {
+    \bass-chorus-last
+  }
+  \transpose bes e {
+    \bass-end
+  }
+  \bar "|."
+}
+
+upper-print-c-major = \relative c' {
+  \set Staff.pedalSustainStyle = #'bracket
+  \key c \major
+  \clef treble
+  \tempo 4 = 93
+  \transpose fis c {
+    \upper-intro-a
+    \upper-intro-b-easy
+    \upper-verse-one
+    \upper-pre-chorus-one
+    \upper-bridge-one
+    \upper-verse-two
+    << {\violin-pre-chorus-two} \\ {\upper-pre-chorus-two} >>
+    \upper-chorus-one-print
+  }
+  \transpose a ees {
+    << {\melody-episode} \\ {\oboe-episode} >>
+  }
+  \transpose fis c {
+    \upper-pre-chorus-three-print
+    \upper-chorus-two
+  }
+  \transpose g des {
+    << {\upper-chorus-three} \\ {\harmony-upper-chorus-three} >>
+  }
+  \transpose bes e {
+    \melody-chorus-last
+  }
+  \transpose bes e' {
+    \upper-end
+  }
+  \bar "|."
+}
+
+lower-print-c-major = \relative c {
+  \set Staff.pedalSustainStyle = #'bracket
+  \key c \major
+  \clef bass
+  \transpose fis c {
+    \lower-intro-print
+    \bass-verse-one
+    \lower-pre-chorus-one
+    << {\lower-bridge-one} \\ {\bass-bridge-one} >>
+  }
+  \transpose fis c' {
+    \bass-verse-two
+    \bass-pre-chorus-two
+    \bass-chorus-one
+  }
+  \transpose a ees {
+    \harmony-and-bass-episode
+  }
+  \transpose fis c' {
+    \bass-pre-chorus-three
+    \bass-chorus-two
+  }
+  \transpose g des' {
+    \bass-chorus-three
+    }
+  \transpose bes e' {
+    \bass-chorus-last
+  }
+  \transpose bes e {
+    \bass-end
+  }
+  \bar "|."
+}
+
+upper-midi-cis-major = \relative c' {
+  \set Staff.pedalSustainStyle = #'bracket
+  \key g \major
+  \clef treble
+  \tempo 4 = 93
+  \transpose fis cis {
+    \upper-intro-a
+    \upper-intro-b-easy
+    \upper-verse-one
+    \upper-pre-chorus-one
+    \upper-bridge-one
+    \upper-verse-two
+    << {\violin-pre-chorus-two} \\ {\upper-pre-chorus-two} >>
+    \upper-chorus-one-midi
+  }
+  \transpose a e {
+    << {\melody-episode} \\ {\oboe-episode} >>
+  }
+  \transpose fis cis {
+    \upper-pre-chorus-three-midi
+    \upper-chorus-two
+  }
+  \transpose g d {
+    << {\upper-chorus-three} \\ {\harmony-upper-chorus-three} >>
+  }
+  \transpose bes f {
+    \melody-chorus-last
+  }
+  \transpose bes f' {
+    \upper-end
+  }
+  \bar "|."
+}
+
+lower-midi-cis-major = \relative c {
+  \set Staff.pedalSustainStyle = #'bracket
+  \key cis \major
+  \clef bass
+  \transpose fis cis {
+    \lower-intro-midi
+    \bass-verse-one
+    \lower-pre-chorus-one
+    << {\lower-bridge-one} \\ {\bass-bridge-one} >>
+  }
+  \transpose fis cis' {
+    \bass-verse-two
+    \bass-pre-chorus-two
+    \bass-chorus-one
+  }
+  \transpose a e {
+    \harmony-and-bass-episode
+  }
+  \transpose fis cis' {
+    \bass-pre-chorus-three
+    \bass-chorus-two
+  }
+  \transpose g d' {
+    \bass-chorus-three
+  }
+  \transpose bes f' {
+    \bass-chorus-last
+  }
+  \transpose bes f {
+    \bass-end
+  }
+  \bar "|."
+}
+
+upper-print-cis-major = \relative c' {
+  \set Staff.pedalSustainStyle = #'bracket
+  \key cis \major
+  \clef treble
+  \tempo 4 = 93
+  \transpose fis cis {
+    \upper-intro-a
+    \upper-intro-b-easy
+    \upper-verse-one
+    \upper-pre-chorus-one
+    \upper-bridge-one
+    \upper-verse-two
+    << {\violin-pre-chorus-two} \\ {\upper-pre-chorus-two} >>
+    \upper-chorus-one-print
+  }
+  \transpose a e {
+    << {\melody-episode} \\ {\oboe-episode} >>
+  }
+  \transpose fis cis {
+    \upper-pre-chorus-three-print
+    \upper-chorus-two
+  }
+  \transpose g d {
+    << {\upper-chorus-three} \\ {\harmony-upper-chorus-three} >>
+  }
+  \transpose bes f {
+    \melody-chorus-last
+  }
+  \transpose bes f' {
+    \upper-end
+  }
+  \bar "|."
+}
+
+lower-print-cis-major = \relative c {
+  \set Staff.pedalSustainStyle = #'bracket
+  \key cis \major
+  \clef bass
+  \transpose fis cis {
+    \lower-intro-print
+    \bass-verse-one
+    \lower-pre-chorus-one
+    << {\lower-bridge-one} \\ {\bass-bridge-one} >>
+  }
+  \transpose fis cis' {
+    \bass-verse-two
+    \bass-pre-chorus-two
+    \bass-chorus-one
+  }
+  \transpose a e {
+    \harmony-and-bass-episode
+  }
+  \transpose fis cis' {
+    \bass-pre-chorus-three
+    \bass-chorus-two
+  }
+  \transpose g d' {
+    \bass-chorus-three
+    }
+  \transpose bes f' {
+    \bass-chorus-last
+  }
+  \transpose bes f {
+    \bass-end
+  }
   \bar "|."
 }
 
@@ -392,7 +671,7 @@ dynamics = {
   s1\p s2 s2_\markup {\italic "rit." }
 }
 
-guitarchords = \chordmode {
+guitarchords-part-one = \chordmode {
   b2:sus2 cis dis:m7 cis b:sus2 cis b:sus2 cis
   dis:m cis fis:sus4 fis gis:m7 fis b:7 cis4:sus4 cis
   dis2:m cis fis:sus4 fis gis:m cis:sus4 fis1
@@ -406,16 +685,66 @@ guitarchords = \chordmode {
   b1 ais2:m7 dis:m7 gis:m fis b:sus2 cis b4 cis
   fis1 cis dis2:m7 cis b cis
   fis1 cis b cis2:sus4 cis fis1
+}
+guitarchords-episode = \chordmode {
   a1 e g d e2:m e:m7 cis1:m7 fis:sus4 fis
+}
+guitarchords-part-two = \chordmode {
   b1 ais4.:m7 dis8:m7~ dis2:m7 gis:m7 fis b4 gis cis2
   b1 ais2:m7 dis:m7 gis:m ais4:m7 b b2:sus2 cis b4 cis
   fis1 cis dis2:m7 ais:m b cis
   fis1 cis b cis2:sus4 cis d1
+}
+guitarchords-part-three = \chordmode {
   g1 d e2:m b:m c d
   g1 d c d
+}
+guitarchords-part-four = \chordmode {
   ees2 f bes:sus4 bes c2:m bes ees f
   bes2 f ees bes c:m f bes1
   g2:m f ees bes c:m7 d:m bes1
+}
+guitarchords = \chordmode {
+  \guitarchords-part-one
+  \guitarchords-episode
+  \guitarchords-part-two
+  \guitarchords-part-three
+  \guitarchords-part-four
+}
+guitarchords-c-major = \chordmode {
+  \transpose fis c {
+    \guitarchords-part-one
+  }
+  \transpose a ees {
+    \guitarchords-episode
+  }
+  \transpose fis c {
+    \guitarchords-part-two
+  }
+  \transpose g cis {
+    \guitarchords-part-three
+  }
+  \transpose bes e {
+    \guitarchords-part-four
+  }
+}
+
+guitarchords-cis-major = \chordmode {
+  \transpose fis cis {
+    \guitarchords-part-one
+  }
+  \transpose a e {
+    \guitarchords-episode
+  }
+  \transpose fis cis {
+    \guitarchords-part-two
+  }
+  \transpose g d {
+    \guitarchords-part-three
+  }
+  \transpose bes f {
+    \guitarchords-part-four
+  }
 }
 
 lyricsmain = \lyricmode {
@@ -455,9 +784,7 @@ lyricsmain = \lyricmode {
 每 一 明 天 愛 著 你
 }
 
-melody = \relative c' {
-  \key fis \major
-  \clef treble
+melody-part-one = \relative c' {
   R1 R1 R1 R1
   fis4 eis8 fis gis4 cis, b' ais8 gis fis4
   gis8 ais dis,4 fis8 gis cis,4
@@ -497,15 +824,66 @@ melody = \relative c' {
   ais8 gis fis4 fis' eis cis dis8 eis dis cis~ cis2
   cis2 ais8( b) cis dis cis2 gis4
   dis'8 eis dis cis cis dis cis8. ais16~ ais8 fis gis2 r4 ais4 fis2 r2
+}
 
-  \key g \major
-  d'2 b8( c) d e d2 a4 b8 a g4 g' fis d e8 fis e d~ d2
+melody-part-two = \relative c'' {
+  d2 b8( c) d e d2 a4 b8 a g4 g' fis d e8 fis e d~ d2
   d2 b8( c) d e d2 a4 e'8 fis e d d e d8. b16~ b8 g a2 r4 g'
-  \key bes \major f1 
+}
+
+melody-part-three = \relative c'' {
+  f1
   \repeat unfold 7 {R1}
   bes,4
   a8 bes c4 f, ees' d8 c bes4 c8 d g,4 c bes4 a8 bes~ bes2 r2 R1
+}
 
+melody = \relative c' {
+  \key fis \major
+  \clef treble
+  \melody-part-one
+
+  \key g \major
+  \melody-part-two
+
+  \key bes \major
+  \melody-part-three
+}
+
+melody-c-major = \relative c' {
+  \key c \major
+  \clef treble
+  \transpose fis c {
+    \melody-part-one
+  }
+
+  \key cis \major
+  \transpose g cis {
+    \melody-part-two
+  }
+
+  \key e \major
+  \transpose bes e {
+    \melody-part-three
+  }
+}
+
+melody-cis-major = \relative c' {
+  \key cis \major
+  \clef treble
+  \transpose fis cis {
+    \melody-part-one
+  }
+
+  \key d \major
+  \transpose g d {
+    \melody-part-two
+  }
+
+  \key f \major
+  \transpose bes f {
+    \melody-part-three
+  }
 }
 
 
@@ -561,6 +939,162 @@ melody = \relative c' {
       \new Staff = "right" { \upper-print }
       \new Dynamics = "Dynamics_pf" \dynamics
       \new Staff = "left" { \lower-print }
+    >>
+  >>
+  \layout {
+    \context {
+      % add the RemoveEmptyStaffContext that erases rest-only staves
+      \Staff \RemoveEmptyStaves
+    }
+    \context {
+      % add the RemoveEmptyStaffContext that erases rest-only staves
+      \Dynamics \RemoveEmptyStaves
+    }
+    \context {
+      \Score
+      % Remove all-rest staves also in the first system
+      \override VerticalAxisGroup.remove-first = ##t
+      % If only one non-empty staff in a system exists, still print the starting bar
+      \override SystemStartBar.collapse-height = #1
+    }
+    \context {
+      \ChordNames
+      \override ChordName #'font-size = #-3
+    }
+  }
+}
+}
+
+\book {
+\bookOutputSuffix "c-major"
+\score {
+  <<
+    \new ChordNames {
+      \guitarchords-c-major
+    }
+    \new Staff = "melodystaff" <<
+      \set Staff.midiInstrument = #"electric guitar (clean)"
+      \set Staff.instrumentName = #"Voice"
+      \new Voice = "melody" {
+        \melody-c-major
+      }
+      \context Lyrics = "lyrics" { \lyricsto "melody" { \lyricsmain } }
+    >>
+    \new PianoStaff <<
+      \set Staff.midiInstrument = #"acoustic grand"
+      \set Staff.instrumentName = #"Piano"
+      \new Staff = "right" { \upper-midi-c-major }
+      \new Staff = "left" { \lower-midi-c-major }
+    >>
+  >>
+  \midi {
+    \context {
+      \ChordNameVoice \remove Note_performer
+    }
+  }
+}
+\score {
+  <<
+    \new ChordNames {
+      \set chordChanges = ##t
+      \guitarchords-c-major
+    }
+    \new Staff = "melodystaff" \with {
+      fontSize = #-3
+      \override StaffSymbol.staff-space = #(magstep -3)
+    }
+    <<
+      \set Staff.midiInstrument = #"choir aahs"
+      \set Staff.instrumentName = #"Voice"
+      \new Voice = "melody" {
+        \melody-c-major
+      }
+      \context Lyrics = "lyrics" { \lyricsto "melody" { \lyricsmain } }
+    >>
+    \new PianoStaff <<
+      \set Staff.midiInstrument = #"acoustic grand"
+      \set Staff.instrumentName = #"Piano"
+      \new Staff = "right" { \upper-print-c-major }
+      \new Dynamics = "Dynamics_pf" \dynamics
+      \new Staff = "left" { \lower-print-c-major }
+    >>
+  >>
+  \layout {
+    \context {
+      % add the RemoveEmptyStaffContext that erases rest-only staves
+      \Staff \RemoveEmptyStaves
+    }
+    \context {
+      % add the RemoveEmptyStaffContext that erases rest-only staves
+      \Dynamics \RemoveEmptyStaves
+    }
+    \context {
+      \Score
+      % Remove all-rest staves also in the first system
+      \override VerticalAxisGroup.remove-first = ##t
+      % If only one non-empty staff in a system exists, still print the starting bar
+      \override SystemStartBar.collapse-height = #1
+    }
+    \context {
+      \ChordNames
+      \override ChordName #'font-size = #-3
+    }
+  }
+}
+}
+
+\book {
+\bookOutputSuffix "c-sharp-major"
+\score {
+  <<
+    \new ChordNames {
+      \guitarchords-cis-major
+    }
+    \new Staff = "melodystaff" <<
+      \set Staff.midiInstrument = #"electric guitar (clean)"
+      \set Staff.instrumentName = #"Voice"
+      \new Voice = "melody" {
+        \melody-cis-major
+      }
+      \context Lyrics = "lyrics" { \lyricsto "melody" { \lyricsmain } }
+    >>
+    \new PianoStaff <<
+      \set Staff.midiInstrument = #"acoustic grand"
+      \set Staff.instrumentName = #"Piano"
+      \new Staff = "right" { \upper-midi-cis-major }
+      \new Staff = "left" { \lower-midi-cis-major }
+    >>
+  >>
+  \midi {
+    \context {
+      \ChordNameVoice \remove Note_performer
+    }
+  }
+}
+\score {
+  <<
+    \new ChordNames {
+      \set chordChanges = ##t
+      \guitarchords-cis-major
+    }
+    \new Staff = "melodystaff" \with {
+      fontSize = #-3
+      \override StaffSymbol.staff-space = #(magstep -3)
+    }
+    <<
+      \set Staff.midiInstrument = #"choir aahs"
+      \set Staff.instrumentName = #"Voice"
+      \new Voice = "melody" {
+        \melody-cis-major
+      }
+      \context Lyrics = "lyrics" { \lyricsto "melody" { \lyricsmain } }
+    >>
+    \new PianoStaff <<
+      \set Staff.midiInstrument = #"acoustic grand"
+      \set Staff.instrumentName = #"Piano"
+      \new Staff = "right" { \upper-print-cis-major }
+      \new Dynamics = "Dynamics_pf" \dynamics
+      \new Staff = "left" { \lower-print-cis-major }
     >>
   >>
   \layout {
